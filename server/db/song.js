@@ -7,9 +7,9 @@ module.exports = db.define('song', {
     allownull: false
   },
   audioUrl: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING
   },
   genre: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING
   }
 })

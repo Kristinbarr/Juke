@@ -14,7 +14,6 @@ Album.hasMany(Song)
 Album.belongsTo(Artist)
 Artist.hasMany(Album)
 
-
 module.exports = {
   db,
   Album,

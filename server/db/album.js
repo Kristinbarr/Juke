@@ -4,11 +4,10 @@ const db = require('./db')
 module.exports = db.define('album', {
   name: {
     type: Sequelize.STRING,
-    allownull: false,
+    allownull: false
   },
   artworkUrl: {
     type: Sequelize.STRING,
-    defaultValue: "default-album.jpg"
+    defaultValue: 'default-album.jpg'
   }
 })
-

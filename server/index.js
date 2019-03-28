@@ -9,12 +9,21 @@ app.use(volleyball)
 
 // Body parsing middleware
 app.use(express.json())
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
 
 // Static file-serving middleware
 app.use(express.static(path.join(__dirname, '..', 'public')))
-app.use(express.static(path.join(__dirname, '..', 'node_modules', 'font-awesome', 'css')))
-app.use('/fonts', express.static(path.join(__dirname, '..', 'node_modules', 'font-awesome', 'fonts')))
+app.use(
+  express.static(
+    path.join(__dirname, '..', 'node_modules', 'font-awesome', 'css')
+  )
+)
+app.use(
+  '/fonts',
+  express.static(
+    path.join(__dirname, '..', 'node_modules', 'font-awesome', 'fonts')
+  )
+)
 
 // Routes that will be accessed via AJAX should be prepended with
 // /api so they are isolated from our GET /* wildcard.
