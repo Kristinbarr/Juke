@@ -30,9 +30,12 @@ export default class Main extends React.Component {
     this.setState({ selectedAlbum: {} })
   }
 
-  playSong() {
-    audio.src =
-      'https://learndotresources.s3.amazonaws.com/workshop/5616dbe5a561920300b10cd7/Dexter_Britain_-_03_-_The_Stars_Are_Out_Interlude.mp3'
+  async playSong(event) {
+    const songId = Number(event.currentTarget.id)
+    const currentAlbum = await axios.get(`/api/album/${this.state.selectedAlbum.id}`)
+    const songObj = currentAlbum.data.songs.filter(song => song.id === songId)
+    audio.src = songObj[0].audioUrl 
+      
     audio.load()
     audio.play()
   }
