@@ -22,7 +22,11 @@ const SingleAlbum = (props) => (
         {props.songs.map((song) => (
           <tr key={song.id}>
             <td>
-              <i className='fa fa-play-circle' id={song.id} onClick={props.playSong} />
+                <i
+                  className={props.currentSong.id === song.id ? 'active' : 'fa fa-play-circle'}
+                  id={song.id}
+                  onClick={props.playSong}
+                />
             </td>
             <td>{song.id}</td>
             <td>{song.name}</td>

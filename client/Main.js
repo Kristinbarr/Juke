@@ -11,7 +11,8 @@ export default class Main extends React.Component {
     super(props)
     this.state = {
       albums: [],
-      selectedAlbum: {}
+      selectedAlbum: {},
+      currentSong: {}
     }
     this.handleClick = this.handleClick.bind(this)
     this.allAlbums = this.allAlbums.bind(this)
@@ -32,12 +33,16 @@ export default class Main extends React.Component {
 
   async playSong(event) {
     const songId = Number(event.currentTarget.id)
-    const currentAlbum = await axios.get(`/api/album/${this.state.selectedAlbum.id}`)
-    const songObj = currentAlbum.data.songs.filter(song => song.id === songId)
-    audio.src = songObj[0].audioUrl 
-      
+    const currentAlbum = await axios.get(
+      `/api/album/${this.state.selectedAlbum.id}`
+    )
+    const songArr = currentAlbum.data.songs.filter((song) => song.id === songId)
+    audio.src = songArr[0].audioUrl
     audio.load()
     audio.play()
+    this.setState({
+      currentSong: songArr[0]
+    })
   }
 
   async componentDidMount() {
@@ -60,6 +65,7 @@ export default class Main extends React.Component {
               artistName={this.state.selectedAlbum.artist.name}
               albumName={this.state.selectedAlbum.name}
               playSong={this.playSong}
+              currentSong={this.state.currentSong}
             />
           ) : (
             this.state.albums.map((album) => (
